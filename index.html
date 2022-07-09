@@ -31,18 +31,17 @@
   </div>
 
 
-
-
-
-
-
-
-
   <script>
-      document.querySelector('.title').style.color='green'
-      document.querySelector('.title').style.fontweight="bolder"
-      document.querySelector('#header-title').style.border="5px solid black"
-    
+      var list=document.getElementsByClassName('list-group-item');
+      list[2].style.backgroundColor="green"
+
+
+    for(let i=0;i<list.length;i++){
+list[i].style.fontWeight="bold"
+list[i].style.fontWeight="bold"
+
+    }
+     
   </script>
 </body>
 </html>
