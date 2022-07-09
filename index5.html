@@ -26,16 +26,24 @@
       <li class="list-group-item">Item 2</li>
       <li class="list-group-item">Item 3</li>
       <li class="list-group-item">Item 4</li>
-      <li class="list5">Item5</li>
+     
     </ul>
    </div>
   </div>
 
 
   <script>
-      var item=document.getElementsByTagName('li')
-     item[4].style.fontSize="20px"
-     item[4].style.background="red"
+      var item2=document.querySelectorAll('.list-group-item')
+      item2[1].style.background="green"
+      item2[2].innerHTML=" "
+
+
+     for(let i=0;i<item2.length;i++)
+     {
+      if(i%2!==0){
+item2[i].style.background="green"
+      }
+     }
    
   </script>
 </body>
