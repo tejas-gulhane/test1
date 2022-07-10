@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+
+    <div class="form">
+        <div class="head">
+           <h1>Booking App</h1>
+        </div>
+        <div class="info">
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="email" placeholder="Email">
+        </div>
+        <div>
+            <button id="btn">SUBMIT</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul>
+            <li>Tejas</li>
+            <li>tejas@gmail.com</li>
+        </ul>
+        
+    </div>
+
+
+    <script >
+        
+
+        let btn=document.querySelector('#btn')
+        let showinfo=document.querySelector('.container')
+
+
+btn.addEventListener('click',(e)=>{
+    var fname=document.querySelector('#name').value
+    var email=document.querySelector('#email').value
+
+
+   let formdata=JSON.parse(localStorage.getItem('formdata')) || []
+
+   formdata.push({
+    'fname':fname,
+    'email':email
+   })
+   localStorage.setItem('formdata',JSON.stringify(formdata))
+   displaydata()
+})
+
+const displaydata=()=>{
+
+    if(localStorage.getItem("formdata")){
+        showinfo.innerHTML=""
+        JSON.parse(localStorage.getItem('formdata')).forEach( data =>{
+            showinfo.innerHTML += `
+                 <ul>
+                    <li>${data.fname}</li>
+                    <li>${data.email}</li>
+                </ul>`;
+        })
+        
+    }
+   
+
+}
+
+displaydata()
+    </script>
+</body>
+</html>
