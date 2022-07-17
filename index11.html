@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+
+    <script>
+         
+         class student {
+    // static count = 0
+    constructor(name,age,mark){
+        this.name=name;
+        this.age=age;
+        this.mark=mark;
+        // student.count++
+    }
+    
+    // checkeligliblity()
+    // {
+    //     if(this.mark>=50)
+    //     {
+    //         console.log('eligilble')
+           
+    //     }
+    //     else
+    //     {
+            
+    //    checkeligliblity
+    //     }
+    // }
+    // countuser()
+    // {
+    //   console.log(student.count)
+    // }
+
+    checkeligliblity(placementage)
+    {
+       return  (boardmark) =>{
+               if(this.mark > boardmark && this.age > placementage )
+               {
+                   console.log( this.name +" is eligible")
+               }
+               else
+               {
+                   console.log( this.name +"is not eligible")
+               }
+           }
+           
+    }
+    
+}
+
+const ram=new student("ram",25,55)
+var shyam=new student("shyam",25,45)
+var golu=new student("golu",25,66)
+var molu=new student("molu",25,58)
+var om=new student("om",25,23)
+ram.checkeligliblity(18)(25) 
+shyam.checkeligliblity(18)(35)
+ golu.checkeligliblity(18)(45) 
+molu.checkeligliblity(18)(55)
+ om.checkeligliblity(18)(65) 
+
+           
+    </script>
+</body>
+</html>
