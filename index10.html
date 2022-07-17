@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+
+    <script>
+         
+         let student ={
+    age:30,
+    printage:function( name ,runs){
+    console.log(this.age+ " " +name+ " " +runs)
+}
+}
+
+let student2={
+    age:25
+}
+
+student.printage.call(student2 ,"sachin" ,18000)
+
+student.printage.apply(student2 ,["rahul",13000])
+
+let newstudent = student.printage.bind(student2 ,"laxman" ,15000)
+newstudent()
+
+let Student ={
+    age:20,
+}
+
+let newstudent1 = student.printage.bind(Student)
+newstudent1()
+
+let multiply =function(x,y){
+    
+    console.log(x*y)
+}
+multiply(5,6)
+
+let multiply2=multiply.bind(this,2)
+multiply2(6)
+
+           
+    </script>
+</body>
+</html>
