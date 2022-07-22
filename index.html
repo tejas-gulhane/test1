@@ -5,173 +5,91 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    <script>
-
-
-// // PROMISE
-// console.log("person1 :shows ticket")
-// console.log("person2 :shows ticket")
-
-
-// let wifeticket = new Promise((resolve)=>{
-//     setTimeout(() => {
-//         resolve("ticket")
-//     }, 1000);
-// })
-
-// let popcorn = wifeticket.then((m)=>{
-//     console.log("popcorn")
-//     return new Promise((resolve)=>{
-//         resolve(`${m} popcorn`)
-//     })
-// })
-
-// let butter = popcorn.then((m)=>{
-//     console.log("butter")
-//     return new Promise((resolve)=>{
-//         resolve(`${m} butter`)
-//     })
-// })
-
-// let colddrink = popcorn.then((m)=>{
-//     console.log("colddrink")
-//     return new Promise((resolve)=>{
-//         resolve(`${m} cold-drink`)
-//     })
-// })
-
-// colddrink.then((m)=>{console.log(m)})
-
-// console.log("person4 :shows ticket")
-// console.log("person5 :shows ticket")
-
-
-// ASYNC AND AWAIT
-// console.log("person1 :shows ticket")
-// console.log("person2 :shows ticket")
-
-// const movie = async () =>{
-//     const wifeticket = new Promise((resolve)=>{
-//         setTimeout(() => {
-//             resolve("ticket")
-//         }, 3000);
-//     })
     
-//     const getpopcorn=new Promise((resolve)=>{resolve("popcorn")})
-//     const getbutter=new Promise((resolve)=>{resolve("butter")})
-//     const getcolddrink=new Promise((resolve)=>{resolve("colddrink")})
+
+    <div class="form">
+        <div class="head">
+           <h1>Booking App</h1>
+        </div>
+        <div class="info">
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="email" placeholder="Email">
+        </div>
+        <div>
+            <button id="btn">SUBMIT</button>
+        </div>
+    </div>
+
+    <div class="container">
+    </div>
 
 
-//     const ticket=await wifeticket;
-
-//     const [popcorn,butter,colddrink] = await Promise.all([getpopcorn,getbutter,getcolddrink])
-//     console.log(popcorn,butter,colddrink)
-//     return ticket;
-
-// }
-
-// movie().then((m)=>{console.log(m)})
-
-
-// console.log("person4 :shows ticket")
-// console.log("person5 :shows ticket")
-
-
-
-
-let posts=[
-    {title:"post1" ,desc:"This is 1st", createdat:new Date().getTime()},
-    {title:"post2" ,desc:"This is 2nd",createdat:new Date().getTime()},
-    {title:"post3" ,desc:"This is 3rd",createdat:new Date().getTime()}
-]
-
-function newpost(post){
-    setInterval(()=>{
-        let display=""
-        posts.forEach((post)=>{
-            display +=`<h1>${post.title} -last updated at ${( new Date().getTime()-post.createdat)/1000 } secs ago</h1>`;
-            
-        })
-        document.body.innerHTML=display;
+    <script >
         
-    },1000)
 
-}
+        let btn=document.querySelector('#btn')
+        let showinfo=document.querySelector('.container')
+        var del=document.querySelector('#del')
 
 
-var creatpost = async (post,callback) =>{
 
-    const create= new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            posts.push({...post,createdat:new Date().getTime()})
-            callback()
+btn.addEventListener('click',(e)=>{
+    var fname=document.querySelector('#name').value
+    var email=document.querySelector('#email').value
 
-            const error= true
-            if(!error){
-                resolve()
-            }
-            else{
-                reject("error")
-            }
-            
-      
-        },1000)
-    })
+
+
+    axios.post('https://crudcrud.com/api/28856ce4a2314615ac99a752abe6d236/appointmentData',
+    {  
+        "name":fname,
+        "email":email
+    }
+    ).then(res=>console.log(res))
+//    let formdata=JSON.parse(localStorage.getItem('formdata')) || []
+
+//    formdata.push({
+//     'fname':fname,
+//     'email':email
+//    })
+//    localStorage.setItem('formdata',JSON.stringify(formdata))
+
+
    
-    const createdpost= await create;
-    return createdpost;
-    
-}
 
+//    displaydata()
+//    del.addEventListener('click',(e)=>{
+// console.log("hi")
+//    })
+})
 
+// const displaydata=()=>{
 
+//     if(localStorage.getItem("formdata")){
+//         showinfo.innerHTML=""
+//         JSON.parse(localStorage.getItem('formdata')).forEach( data =>{
+//             showinfo.innerHTML += `
+//                  <ul>
+//                     <li>${data.fname}</li>
+//                     <li>${data.email}</li>
+//                     <button id="del">Delete</button>
+//                 </ul>`;
+//         })
 
-let  deletepost= async ()=>{
-    const deleted= new Promise((resolve , reject)=>{
-        setTimeout(()=>{
-            if(posts.length){
-                resolve(posts.pop())
-            }
-            else{
-                reject("Array is empty now")
-            }
-        },1000)
-    })
+   
+        
+//     }
+   
 
-    const deleteitem = await deleted;
-    return deleteitem;
-}
-
-// creatpost({title:"post4" ,desc:"This is 4th" },newpost).
-// then(()=>{
-//     newpost();
-//     deletepost().then(()=>{
-//         newpost()
-//     }).catch(err=>console.log(err))
 // }
-//     ).catch(err=>console.log(err))
-
-// deletepost()
-// deletepost()
-// deletepost()
 
 
-async function  printpost (){
-    await creatpost({title:"post4" ,desc:"This is 4th" },newpost);
-    newpost();
-    await deletepost();
-    newpost();
-
-}
-printpost();
-deletepost()
-deletepost()
-deletepost()
-deletepost()
 
 
+// displaydata()
     </script>
 </body>
 </html>
