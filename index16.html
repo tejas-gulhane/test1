@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    
+
+    <div class="form">
+        <div class="head">
+           <h1>Booking App</h1>
+        </div>
+        <div class="info">
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="email" placeholder="Email">
+        </div>
+        <div>
+            <button id="btn">SUBMIT</button>
+        </div>
+    </div>
+
+    <div class="container">
+    </div>
+
+
+    <script >
+        
+
+        let btn=document.querySelector('#btn')
+        let showinfo=document.querySelector('.container')
+        var del=document.querySelector('#del')
+
+
+
+btn.addEventListener('click',(e)=>{
+    var fname=document.querySelector('#name').value
+    var email=document.querySelector('#email').value
+
+
+
+    axios.post('https://crudcrud.com/api/28856ce4a2314615ac99a752abe6d236/appointmentData',
+    {  
+        "name":fname,
+        "email":email
+    }
+    ).then(res=>console.log(res))
+    displaydata();
+})
+
+var displaydata=()=>{
+    showinfo.innerHTML=""
+    axios.get('https://crudcrud.com/api/28856ce4a2314615ac99a752abe6d236/appointmentData')
+    .then(res => {
+        res.data.forEach( val => {
+            showinfo.innerHTML += `
+                 <ul>
+                    <li>${val.name}</li>
+                    <li>${val.email}</li>
+                    <button id="del">Delete</button>
+                </ul>`;
+        })
+    })
+}
+
+
+
+
+displaydata()
+    </script>
+</body>
+</html>
