@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    
+let posts=[
+
+{title:"post1" ,desc:"This is 1st", createdat:new Date().getTime()},
+
+{title:"post2" ,desc:"This is 2nd",createdat:new Date().getTime()},
+
+{title:"post3" ,desc:"This is 3rd",createdat:new Date().getTime()}
+
+]
+
+
+
+function newpost(post){
+
+setInterval(()=>{
+
+    let display=""
+
+    posts.forEach((post)=>{
+
+        display +=`<h1>${post.title} -last updated at ${( new Date().getTime()-post.createdat)/1000 } secs ago</h1>`;
+
+        
+
+    })
+
+    document.body.innerHTML=display;
+
+    
+
+},1000)
+
+
+
+}
+
+var creatpost=(post)=>{
+return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+ 
+    resolve(posts.push({...post,createdat:new Date().getTime()}))
+
+// callback()
+
+
+
+},2000)
+})
+
+}
+
+
+
+
+
+
+
+updatelastactivity= () =>{
+    return new Promise((resolve,reject)=>{
+setTimeout(()=>{
+    let usertime=new Date().getTime()
+    resolve(usertime)
+},1000)
+    })
+}
+
+
+   
+    Promise.all([creatpost({title:"post4" ,desc:"This is 4th" }),updatelastactivity()]).
+    then(([post,lasttime]) => {
+console.log(lasttime,posts)
+newpost()
+
+creatpost({title:"post5" ,desc:"This is 5th" })
+    })
+
+
+
+
+var deleteuser=async()=> {
+  
+    posts.pop()
+}
+
+</script>
+</html>
