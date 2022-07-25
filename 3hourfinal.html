@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+    <div class="form"  >
+        <input type="text" id="name" placeholder="EXPENCE ITEM">
+        <input type="text" id="price" placeholder="PRICE">
+        <button id="btn" onclick="addexpence()">ADD</button>
+        <button id="subbtn">submit edit</button>
+    </div>
+    <div class="container"   >
+
+    </div>
+
+
+
+    <script>
+        let add = document.querySelector("#btn")
+        let showinfo = document.querySelector('.container')
+
+        let addd = document.querySelector("#subbtn")
+
+        // DISPLAY THE EXPENCES
+        var showexpence = () => {
+            showinfo.innerHTML = ""
+            axios("https://crudcrud.com/api/e7d2e5dfed9848b5bf33c26086a502a6/expence"
+            ).then((res) => {
+                console.log("get sucessfully");
+
+                res.data.forEach(
+                    (val, index) => {
+                        var id = val._id;
+                        showinfo.innerHTML += `
+                            <ul>
+                                <li id="valname">${val.name}</li>
+                                <li id="valprice">${val.price}</li>
+                                <button  onclick=del("${id}")>Delete</button>
+                                <button class='editbtn'  id=${id}>Edit</button>
+                            </ul>`;
+
+                    })
+            })
+        }
+        //  ,"${val.name}","${val.price}"
+        //  ADD NEW EXPENXES
+        let addexpence = () => {
+            let name = document.querySelector("#name").value
+            let price = document.querySelector("#price").value
+
+            axios.post("https://crudcrud.com/api/e7d2e5dfed9848b5bf33c26086a502a6/expence", {
+                name: name,
+                price: price
+            }).then((res) => {
+                console.log("post sucessfully")
+                showexpence()
+            })
+        }
+
+        // DELETE THE EXPENCES
+
+   function del(id) {
+
+            axios.delete(`https://crudcrud.com/api/e7d2e5dfed9848b5bf33c26086a502a6/expence/${id}`).
+                then((res) => {
+                    console.log("sucessfuly deleted")
+                    showexpence()
+                }
+                )
+
+        }
+
+        // EDIT THE EXPENCES
+
+showinfo.addEventListener('click',(e)=>{
+
+if(e.target.classList.contains('editbtn')){
+
+    let id=e.target.id;
+
+     document.querySelector("#name").value=e.target.parentElement.querySelector('#valname').innerText;
+         document.querySelector("#price").value=e.target.parentElement.querySelector('#valprice').innerText;
+
+  addd.addEventListener('click',(e)=>{
+
+
+let x=document.querySelector("#name").value;
+let y=document.querySelector("#price").value
+let obj={
+    name:x,
+    price:y
+}
+
+
+    axios.put(`https://crudcrud.com/api/e7d2e5dfed9848b5bf33c26086a502a6/expence/${id}`,obj)
+ .then(result=>{
+    console.log(result);
+    showexpence();
+ })
+
+  })
+
+
+
+
+
+
+
+}
+
+}
+)
+
+        showexpence();
+
+    </script>
+</body>
+
+</html>
